@@ -30,45 +30,15 @@ class UserRepository {
   }
 
   getUserNames() {
-    let arrNames = [];
-
-    this._users.forEach((user) => {
-      for (let key in user) {
-        if (key === `_name`) {
-          arrNames.push(user[key]);
-        }
-      }
-    });
-
-    return arrNames;
+    return this._users.map((el) => el._name);
   }
 
   getUserIds() {
-    const arrIds = [];
-
-    this._users.forEach((user) => {
-      for (let key in user) {
-        if (key === `_id`) {
-          arrIds.push(user[key]);
-        }
-      }
-    });
-
-    return arrIds;
+    return this._users.map((el) => el._id);
   }
 
   getUserNameById(id) {
-    let name;
-
-    this._users.forEach((user) => {
-      for (let key in user) {
-        if (key === `_id` && user[key] === `${id}`) {
-          name = user[`_name`];
-        }
-      }
-    });
-
-    return name;
+    return this._users.find((el) => el._id === `${id}`)._name;
   }
 }
 
