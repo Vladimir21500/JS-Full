@@ -1,4 +1,4 @@
-function handleClick(event) {
+function handleClick() {
   console.log(event.target.textContent);
 }
 
