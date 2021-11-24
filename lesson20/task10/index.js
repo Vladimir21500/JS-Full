@@ -1,4 +1,4 @@
-export function finishForm() {
+function finishForm() {
   const inputText = document.createElement(`input`);
   inputText.setAttribute(`type`, `text`);
   inputText.setAttribute(`name`, `login`);
