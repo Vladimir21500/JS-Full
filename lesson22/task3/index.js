@@ -6,6 +6,7 @@
 */
 
 const listElem = document.querySelector(`.list`);
+const actionsElem = document.querySelector(`.actions`);
 
 const tasks = [
   { text: `Buy milk`, done: false },
@@ -16,6 +17,7 @@ const tasks = [
 ];
 
 const renderTasks = (tasksList) => {
+  listElem.innerHTML = ``;
   const tasksElems = tasksList
     .sort((a, b) => a.done - b.done)
     .map(({ text, done }, index) => {
@@ -27,9 +29,8 @@ const renderTasks = (tasksList) => {
       checkbox.setAttribute(`data-id`, `${index}`);
       checkbox.checked = done;
       checkbox.classList.add(`list__item-checkbox`);
-      if (checkbox.checked) {
-        listItemElem.classList.add(`list__item_done`);
-      }
+
+      if (checkbox.checked) listItemElem.classList.add(`list__item_done`);
       listItemElem.append(checkbox, text);
 
       return listItemElem;
@@ -41,14 +42,29 @@ const renderTasks = (tasksList) => {
 const checkBoxChanged = (event) => {
   const isChecked = event.target.classList.contains(`list__item-checkbox`);
   if (!isChecked) return;
-  /* const idCheckbox = event.target.dataset.id;
-  const doneCheckbox = event.target.checked;
-  document.querySelector(`[data-id="${idCheckbox}"]`).checked = doneCheckbox; */
   const doneCheckbox = event.target.checked;
   const idCheckbox = event.target.dataset.id;
-  document.querySelector(`[data-id="${idCheckbox}"]`).checked = doneCheckbox;
+  const textContentItem = document.querySelector(
+    `#number${idCheckbox}`
+  ).textContent;
+  tasks.find((task) => task.text === textContentItem).done = doneCheckbox;
+  renderTasks(tasks);
+};
+
+const addTask = (event) => {
+  const isPush = event.target.classList.contains(`create-task-btn`);
+  if (!isPush) return;
+
+  const taskText = document.querySelector(`.task-input`).value;
+  if (taskText) {
+    tasks.push({ text: taskText, done: false });
+  }
+  document.querySelector(`.task-input`).value = ``;
+  renderTasks(tasks);
 };
 
 listElem.addEventListener(`click`, checkBoxChanged);
+
+actionsElem.addEventListener(`click`, addTask);
 
 renderTasks(tasks);
