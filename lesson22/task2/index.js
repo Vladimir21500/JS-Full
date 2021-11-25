@@ -1,81 +1,64 @@
-/* 1. создать 3 сектора
-2. создать 10 рядов в секторе
-3. создать 10 мест в ряду
-4. по клику мыши по месту получаем (номер сектора, номер ряда, номер места) 
-алгоритм
-секторы: создаем массив секторов, с помощью цикла до 3 
-добаваляем элемент сектор в арену и пушим сектор в массив
-и так для всех элементов
-отображение координат места: 
-при нажатии создаем обработчик, который:
-на погружении возвращает индекс+1 элемента 
- обработчик:создает переменную координат и содержит в себе 3 обработчика
- 1. записывает в переменную индекс сектора
- 2. записывает индекс ряда
- 3. записывает индекс места
- 4. добавляет текст координат в боард
-*/
-const arena = document.querySelector(`.arena`);
+const generateNumbersRange = (from, to) => {
+  const result = [];
 
-let coordinates = ``;
-/* const sectors = [];
-const lines = [];
-const seats = []; */
+  for (let i = from; i <= to; i += 1) {
+    result.push(i);
+  }
 
-const getIndex = (index, type) => {
-  coordinates += `${type} ${index + 1} `;
+  return result;
 };
 
-const getPosition = () => {
-  document
-    .querySelector(`.sector`)
-    .addEventListener(`click`, getIndex(/* sectors.indexOf() */ 2, `S`), true);
+const getLineSeats = () =>
+  generateNumbersRange(1, 10)
+    .map(
+      (seatNumber) =>
+        `<div class="sector__seat" data-seat-number="${seatNumber}">
+      </div>`
+    )
+    .join(``);
 
-  document
-    .querySelector(`.sector__line`)
-    .addEventListener(`click`, getIndex(3, `L`), true);
+const getSectorLines = () => {
+  const seatsString = getLineSeats();
 
-  document
-    .querySelector(`.sector__seat`)
-    .addEventListener(`click`, getIndex(2, `P`), true);
+  return generateNumbersRange(1, 10)
+    .map(
+      (lineNumber) =>
+        `<div class="sector__line" data-line-number="${lineNumber}">
+      ${seatsString}</div>`
+    )
+    .join(``);
+};
+const arenaElem = document.querySelector(`.arena`);
+
+const renderArena = () => {
+  const linesString = getSectorLines();
+
+  const sectorsString = generateNumbersRange(1, 3)
+    .map(
+      (sectorNumber) =>
+        `<div class="sector" data-sector-number="${sectorNumber}">
+    ${linesString}</div>`
+    )
+    .join(``);
+
+  arenaElem.innerHTML = sectorsString;
 };
 
-for (let i = 1; i <= 3; i += 1) {
-  const sectorElem = document.createElement(`div`);
-  sectorElem.classList.add(`sector`);
-  /*   sectors.push(sectorElem);
-   */ arena.append(sectorElem);
-}
-const sectors = Array.from(document.querySelectorAll(`.sector`));
-
-sectors.forEach((sector) => {
-  for (let i = 1; i <= 10; i += 1) {
-    const sectorLineElem = document.createElement(`div`);
-    sectorLineElem.classList.add(`sector__line`);
-    /*     lines.push(sectorLineElem);
-     */ sector.append(sectorLineElem);
+const onSeatSelect = (event) => {
+  const isSeat = event.target.classList.contains(`sector__seat`);
+  if (!isSeat) {
+    return;
   }
-});
 
-const lines = Array.from(document.querySelectorAll(`.sector__line`));
+  const seatNumber = event.target.dataset.seatNumber;
+  const lineNumber = event.target.closest(`.sector__line`).dataset.lineNumber;
+  const sectorNumber = event.target.closest(`.sector`).dataset.sectorNumber;
 
-lines.forEach((line) => {
-  for (let i = 1; i <= 10; i += 1) {
-    let sectorSeatElem = 0;
-    sectorSeatElem = document.createElement(`div`);
-    sectorSeatElem.classList.add(`sector__seat`);
-    /*     seats.push(sectorSeatElem);
-     */ line.append(sectorSeatElem);
-  }
-});
-/* const seats = Array.from(document.querySelectorAll(`.sector__seat`));
-document.querySelector(`.sector__seat`).addEventListener(`click`, getPosition);
- */
-const seats = Array.from(document.querySelectorAll(`.sector__seat`));
+  const selectedSeatElem = document.querySelector(`.board__selected-seat`);
 
-document.querySelector(`.sector__seat`).addEventListener(`click`, () => {
-  console.log(`event work correct`);
-});
+  selectedSeatElem.textContent = `S ${sectorNumber} - L ${lineNumber} - S ${seatNumber}`;
+};
 
-const board = document.querySelector(`.board__selected-seat`);
-board.textContent = coordinates;
+arenaElem.addEventListener(`click`, onSeatSelect);
+
+renderArena();
