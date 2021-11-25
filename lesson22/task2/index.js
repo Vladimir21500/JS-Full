@@ -17,35 +17,65 @@
 */
 const arena = document.querySelector(`.arena`);
 
-const sectors = [];
+let coordinates = ``;
+/* const sectors = [];
+const lines = [];
+const seats = []; */
+
+const getIndex = (index, type) => {
+  coordinates += `${type} ${index + 1} `;
+};
+
+const getPosition = () => {
+  document
+    .querySelector(`.sector`)
+    .addEventListener(`click`, getIndex(/* sectors.indexOf() */ 2, `S`), true);
+
+  document
+    .querySelector(`.sector__line`)
+    .addEventListener(`click`, getIndex(3, `L`), true);
+
+  document
+    .querySelector(`.sector__seat`)
+    .addEventListener(`click`, getIndex(2, `P`), true);
+};
+
 for (let i = 1; i <= 3; i += 1) {
   const sectorElem = document.createElement(`div`);
   sectorElem.classList.add(`sector`);
-  sectors.push(sectorElem);
-  arena.append(sectorElem);
+  /*   sectors.push(sectorElem);
+   */ arena.append(sectorElem);
 }
+const sectors = Array.from(document.querySelectorAll(`.sector`));
 
-const lines = [];
 sectors.forEach((sector) => {
   for (let i = 1; i <= 10; i += 1) {
     const sectorLineElem = document.createElement(`div`);
     sectorLineElem.classList.add(`sector__line`);
-    lines.push(sectorLineElem);
-    sector.append(sectorLineElem);
+    /*     lines.push(sectorLineElem);
+     */ sector.append(sectorLineElem);
   }
 });
 
-let sectorSeatElem = 0;
+const lines = Array.from(document.querySelectorAll(`.sector__line`));
 
 lines.forEach((line) => {
   for (let i = 1; i <= 10; i += 1) {
+    let sectorSeatElem = 0;
     sectorSeatElem = document.createElement(`div`);
     sectorSeatElem.classList.add(`sector__seat`);
-    lines.push(sectorSeatElem);
-    line.append(sectorSeatElem);
+    /*     seats.push(sectorSeatElem);
+     */ line.append(sectorSeatElem);
   }
 });
+/* const seats = Array.from(document.querySelectorAll(`.sector__seat`));
+document.querySelector(`.sector__seat`).addEventListener(`click`, getPosition);
+ */
+const seats = Array.from(document.querySelectorAll(`.sector__seat`));
 
-sectorSeatElem.addEventListener(`click`, () => {
-  alert(`work`);
+document.querySelector(`.sector__seat`).addEventListener(`click`, () => {
+  console.log(`event work correct`);
 });
+
+const board = document.querySelector(`.board__selected-seat`);
+board.textContent = coordinates;
