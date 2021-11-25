@@ -3,7 +3,7 @@ const passwordInputElem = document.querySelector(`#password`);
 const emailErrorElem = document.querySelector(`.error-text_email`);
 const passwordErrorElem = document.querySelector(`.error-text_password`);
 
-const isRequired = (value) => (value ? undefined : `required`);
+const isRequired = (value) => (value ? undefined : `Required`);
 
 const isEmail = (value) =>
   value.includes(`@`) ? undefined : `Should be an email`;
@@ -13,7 +13,7 @@ const validatorsByField = {
   password: [isRequired],
 };
 
-const validate = (fieldName, value) => {
+const validate = (fieldName) => {
   const validators = validatorsByField[fieldName];
   return validators
     .map((validator) => validator(event.target.value))
