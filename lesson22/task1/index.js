@@ -13,10 +13,10 @@ const validatorsByField = {
   password: [isRequired],
 };
 
-const validate = (fieldName) => {
+const validate = (fieldName, value) => {
   const validators = validatorsByField[fieldName];
   return validators
-    .map((validator) => validator(event.target.value))
+    .map((validator) => validator(value))
     .filter((errorText) => errorText)
     .join(`, `);
 };
