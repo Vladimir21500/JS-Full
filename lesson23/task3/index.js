@@ -42,7 +42,9 @@ const months = {
 };
 
 export function getDiff(startDate, endDate) {
-  const diff = new Date(endDate).getTime() - new Date(startDate).getTime();
+  const diff = Math.abs(
+    new Date(endDate).getTime() - new Date(startDate).getTime()
+  );
   const fullYear = new Date(diff).getUTCFullYear() - DEFAULT_POINT_YEAR;
   const fullMonths = new Date(diff).getUTCMonth();
 
