@@ -6,4 +6,10 @@ export function dayOfWeek(date, days) {
 
   return weekDays[new Date(dateInFuture).getDay()];
 }
-const result = dayOfWeek(new Date(2019, 0, 1), 14);
+
+let result = dayOfWeek(new Date(2019, 0, 1), 14);
+console.log(result);
+result = dayOfWeek(new Date(2019, 0, 1), 15);
+console.log(result);
+result = dayOfWeek(new Date(2021, 10, 26), 1);
+console.log(result);
