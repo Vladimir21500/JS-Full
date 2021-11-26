@@ -6,7 +6,7 @@
 */
 
 const listElem = document.querySelector(`.list`);
-const actionsElem = document.querySelector(`.actions`);
+const createButton = document.querySelector(`.create-task-btn`);
 
 const tasks = [
   { id: 0, text: `Buy milk`, done: true },
@@ -53,10 +53,7 @@ const checkBoxChanged = (event) => {
   renderTasks(tasks);
 };
 
-const addTask = (event) => {
-  const isPush = event.target.classList.contains(`create-task-btn`);
-  if (!isPush) return;
-
+const addTask = () => {
   const taskText = document.querySelector(`.task-input`).value;
   if (taskText) {
     tasks.push({ id: tasks.length, text: taskText, done: false });
@@ -67,6 +64,6 @@ const addTask = (event) => {
 
 listElem.addEventListener(`click`, checkBoxChanged);
 
-actionsElem.addEventListener(`click`, addTask);
+createButton.addEventListener(`click`, addTask);
 
 renderTasks(tasks);
