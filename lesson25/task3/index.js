@@ -1,8 +1,11 @@
-const sum = (a, b) => a + b;
+export const mult = (a) => (b) => a * b;
 
-const sum = (a) => (b) => a + b;
+export const twice = mult(2);
 
-const add4 = sum(4);
+export const triple = mult(3);
 
-const result = add4(5);
-console.log(result);
+console.log(mult(4)(5));
+
+console.log(twice(4));
+
+console.log(triple(9));
