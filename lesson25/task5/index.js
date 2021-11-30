@@ -37,7 +37,7 @@ const setMethodsNames = {
   milliseconds: 'setMilliseconds',
 };
 
-/* export */ const shmoment = (date) => {
+export const shmoment = (date) => {
   let result = new Date(date);
   const changeDate = {
     add(type, number) {
