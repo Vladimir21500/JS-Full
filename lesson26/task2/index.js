@@ -5,8 +5,8 @@
  * @param {number} period
  * @return {undefined}
  */
-const pinger = (num, period) => {
-  let i = num;
+const pinger = (count, period) => {
+  let i = count;
   console.log('Ping');
 
   const interval = setInterval(() => {
@@ -17,8 +17,6 @@ const pinger = (num, period) => {
     }
   }, period);
 };
-
-pinger(5, 1000);
 
 // examples
 /* pinger(5, 100); // makes 5 writes with 100 ms interval
