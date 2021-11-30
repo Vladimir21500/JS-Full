@@ -5,7 +5,7 @@
  * @param {number} period
  * @return {undefined}
  */
-const pinger = (count, period) => {
+export const pinger = (count, period) => {
   let i = count;
   console.log('Ping');
 
