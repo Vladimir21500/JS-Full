@@ -16,44 +16,60 @@
     возвращает обект
     2.3 result возвращает дату 
 */
-export const shmoment = (date) => {
-  let newDate = date;
+
+const getMethodsNames = {
+  years: 'getFullYear',
+  months: 'getMonth',
+  days: 'getDate',
+  hours: 'getHours',
+  minutes: 'getMinutes',
+  seconds: 'getSeconds',
+  milliseconds: 'getMilliseconds',
+};
+
+const setMethodsNames = {
+  years: 'setFullYear',
+  months: 'setMonth',
+  days: 'setDate',
+  hours: 'setHours',
+  minutes: 'setMinutes',
+  seconds: 'setSeconds',
+  milliseconds: 'setMilliseconds',
+};
+
+/* export */ const shmoment = (date) => {
+  let result = new Date(date);
   const changeDate = {
     add(type, number) {
-      if (type === 'years') newDate.setFullYear(newDate.getFullYear() + number);
-      if (type === 'months') newDate.setMonth(newDate.getMonth() + number);
-      if (type === 'days') newDate.setDate(newDate.getDay() + number);
-      if (type === 'hours') newDate.setHours(newDate.getHours() + number);
-      if (type === 'minutes') newDate.setMinutes(newDate.getMinutes() + number);
-      if (type === 'seconds') newDate.setSeconds(newDate.getSeconds() + number);
-      if (type === 'milliseconds')
-        newDate.setMilliseconds(newDate.getMilliseconds() + number);
-
+      const currentUnitValue = result[getMethodsNames[type]]();
+      result = new Date(
+        result[setMethodsNames[type]](currentUnitValue + number)
+      );
       return this;
     },
     subtract(type, number) {
-      if (type === 'years') newDate.setFullYear(newDate.getFullYear() - number);
-      if (type === 'months') newDate.setMonth(newDate.getMonth() - number);
-      if (type === 'days') newDate.setDate(newDate.getDay() - number);
-      if (type === 'hours') newDate.setHours(newDate.getHours() - number);
-      if (type === 'minutes') newDate.setMinutes(newDate.getMinutes() - number);
-      if (type === 'seconds') newDate.setSeconds(newDate.getSeconds() - number);
-      if (type === 'milliseconds')
-        newDate.setMilliseconds(newDate.getMilliseconds() - number);
-
+      const currentUnitValue = result[getMethodsNames[type]]();
+      result = new Date(
+        result[setMethodsNames[type]](currentUnitValue - number)
+      );
       return this;
     },
     result() {
-      return newDate;
+      return result;
     },
   };
 
   return changeDate;
 };
 
-const result = shmoment(new Date())
+/* const result = shmoment(new Date())
   .add('years', 2)
   .subtract('months', 3)
   .add('minutes', 1)
   .result();
-console.log(result);
+console.log(result); */
+
+const date1 = new Date(19, 4, 5);
+console.log(date1);
+console.log(shmoment(date1).add('days', 4).subtract('months', 3).result());
+console.log(date1);
