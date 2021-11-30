@@ -1,4 +1,4 @@
-const calc = (value) => {
+export const calc = (value) => {
   let result = value;
   const calculator = {
     add(value) {
@@ -23,7 +23,3 @@ const calc = (value) => {
   };
   return calculator;
 };
-
-const result = calc(5).add(2).mult(5).div(2).subtract(0).result();
-
-console.log(result);
