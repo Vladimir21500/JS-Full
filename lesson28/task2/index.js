@@ -19,4 +19,4 @@ const asyncCalculator = num =>
       const result = value * 2;
       console.log(`Doubled value: ${result}`);
     });
-asyncCalculator(4);
+asyncCalculator(4).then(value => console.log(value));

@@ -1,4 +1,4 @@
-const requestUserData = userId => {
+export const requestUserData = userId => {
   const request = new Promise((resolve, reject) => {
     if (userId === 'broken') {
       setTimeout(() => {
@@ -9,16 +9,11 @@ const requestUserData = userId => {
         resolve({
           name: 'John',
           age: 17,
-          email: `${userId}`,
           userId,
+          email: `${userId}@example.com`,
         });
       }, 1000);
     }
   });
   return request;
 };
-
-requestUserData('broken')
-  .catch(error => console.log(error))
-  .then(data => console.log(data))
-  .finally(data => console.log('finally'));
