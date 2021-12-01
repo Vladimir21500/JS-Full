@@ -15,7 +15,11 @@ export const asyncCalculator = number =>
           }, 500);
         }),
     )
-    .then(value => {
-      const result = value * 2;
-      console.log(`Doubled value: ${result}`);
-    });
+    .then(
+      value =>
+        new Promise(resolve => {
+          const result = value * 2;
+          console.log(`Doubled value: ${result}`);
+          resolve(result);
+        }),
+    );
