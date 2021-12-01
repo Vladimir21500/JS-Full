@@ -1,4 +1,4 @@
-export const addImageWithPromise = (imgSrc) => {
+export const addImage = (imgSrc) => {
   const p = new Promise((resolve, reject) => {
     const imgElem = document.createElement('img');
     imgElem.setAttribute('alt', 'My Photo');
@@ -20,7 +20,7 @@ export const addImageWithPromise = (imgSrc) => {
   return p;
 };
 
-const resultPromise = addImageWithPromise(
+const resultPromise = addImage(
   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
 );
 
