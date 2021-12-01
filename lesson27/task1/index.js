@@ -8,8 +8,6 @@ export const addImage = (imgSrc) => {
 
     const onImageLoaded = () => {
       const { width, height } = imgElem;
-      const sizeElem = document.querySelector('.image-size');
-      sizeElem.textContent = `${width} x ${height}`;
       resolve({ width, height });
     };
 
