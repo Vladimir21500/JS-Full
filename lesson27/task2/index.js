@@ -1,5 +1,5 @@
 export const addImageV2 = (imgSrc) => {
-  const p = new Promise((resolve, reject) => {
+  const addImage = new Promise((resolve, reject) => {
     const imgElem = document.createElement('img');
     imgElem.setAttribute('alt', 'My Photo');
     imgElem.src = imgSrc;
@@ -18,13 +18,13 @@ export const addImageV2 = (imgSrc) => {
     );
   });
 
-  return p;
+  return addImage;
 };
 /* 
 addImageV2(
-  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
+  'https://addImage.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
 ).then((data) => console.log(data)); // ==> { width: 200, height: 100 }
 addImageV2(
-  'ttps://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
+  'ttps://addImage.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
 ).catch((error) => console.log(error)); // ==> 'Image load failed'
  */
