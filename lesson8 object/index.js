@@ -1,10 +1,6 @@
 const getCustomersList = (obj) => {
-  const copyObj = JSON.parse(JSON.stringify(obj));
-  const customersArr = Object.values(copyObj);
-  customersArr.forEach((customer) => {
-    customer.id = Object.keys(copyObj)[customersArr.indexOf(customer)];
-  });
-  return customersArr.sort((a, b) => a.age - b.age);
+  const customersKeys = Object.keys(obj);
+  return Object.values(obj).map((el, index) => {});
 };
 const customers = {
   'customer-id-1': {
