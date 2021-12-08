@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { renderTasks } from './renderer.js';
-import { getItem, setItem } from './storage.js';
 import { getTasksList, updateTask } from './tasksGateway.js';
 
 export const onToggleTask = event => {
@@ -9,8 +8,7 @@ export const onToggleTask = event => {
   if (!isCheckbox) return;
 
   const taskId = event.target.dataset.id;
-  const tasksList = getItem('tasksList');
-  const { text, createDate } = tasksList.find(task => task.id === taskId);
+  const { text, createDate } = getTasksList().then(tasks => tasks.find(task => task.id === taskId));
   const done = event.target.checked;
 
   const updatedTask = {
@@ -20,10 +18,9 @@ export const onToggleTask = event => {
     finishDate: done ? new Date().toISOString() : null,
   };
 
-  updateTask(taskId, updatedTask)
+  updateTask(updatedTask, taskId)
     .then(() => getTasksList())
     .then(newTasksList => {
-      setItem('tasksList', newTasksList);
       renderTasks();
     });
 };

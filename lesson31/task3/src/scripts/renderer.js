@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { setItem, getItem } from './storage.js';
+import { getTasksList } from './tasksGateway.js';
 
 const listElem = document.querySelector(`.list`);
 
@@ -19,13 +19,14 @@ const createListItem = ({ text, done, id }) => {
   const listItemElem = document.createElement(`li`);
   listItemElem.classList.add(`list-item`);
   const checkboxElem = createCheckbox({ done, id });
-  if (done) {
-    listItemElem.classList.add(`list-item_done`);
-  }
 
   const textElem = document.createElement('span');
-  textElem.classList.add(list - item__text);
+  textElem.classList.add('list-item__text');
   textElem.textContent = text;
+  if (done) {
+    listItemElem.classList.add(`list-item_done`);
+    textElem.classList.add(`list-item__text_done`);
+  }
 
   const deleteBtnElem = document.createElement('button');
   deleteBtnElem.classList.add('list-item__delete-btn');
@@ -36,11 +37,9 @@ const createListItem = ({ text, done, id }) => {
 };
 
 export const renderTasks = () => {
-  const tasksList = getItem(`tasksList`) || [];
-
   listElem.innerHTML = ``;
-  const tasksElems = tasksList.sort(compareTasks).map(createListItem);
-
-  listElem.append(...tasksElems);
-  console.log('renderTask()');
+  getTasksList().then(tasks => {
+    const tasksElems = tasks.sort(compareTasks).map(createListItem);
+    listElem.append(...tasksElems);
+  });
 };
