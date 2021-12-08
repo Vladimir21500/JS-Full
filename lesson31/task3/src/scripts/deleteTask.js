@@ -1,11 +1,7 @@
-import { deleteTask } from './tasksGateway.js';
+import { renderTasks } from './renderer.js';
+import { deleteTask, getTasksList } from './tasksGateway.js';
 
 export const onDeleteTask = event => {
-  const isDeleteButton = event.target.classList.contains('list-item__delete-btn');
-
-  console.log(isDeleteButton);
-  if (!isDeleteButton) return;
-
   const taskId = event.target.dataset.id;
-  deleteTask(taskId);
+  deleteTask(taskId).then(getTasksList).then(renderTasks);
 };

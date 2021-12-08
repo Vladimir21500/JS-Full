@@ -20,9 +20,7 @@ export const onCreateTask = () => {
 
   createTask(newTask)
     .then(() => getTasksList())
-    .then(newTasksList => {
-      renderTasks();
-    });
+    .then(renderTasks);
 };
 
 /* 1.Prepare data
