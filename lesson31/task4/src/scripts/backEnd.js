@@ -9,3 +9,21 @@ export const sendToServer = userData => {
     body: JSON.stringify(userData),
   });
 };
+
+const passwordInputElem = document.querySelector('[name="password"]');
+
+let userId = null;
+
+const getUserId = () => {
+  console.log(passwordInputElem.value);
+  return fetch(baseUrl)
+    .then(response => response.json())
+    .then(users => {
+      userId = users.find(user => user.password === passwordInputElem.value).id;
+    });
+};
+
+export const getUser = () => {
+  getUserId();
+  return fetch(`${baseUrl}/${userId}`).then(response => response.json());
+};

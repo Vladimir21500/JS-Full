@@ -18,7 +18,7 @@
    3. выводим alert с данными с сервера
 */
 
-import { sendToServer } from './backEnd.js';
+import { getUser, sendToServer } from './backEnd.js';
 import { onChanged, user } from './changeInput.js';
 import { cleanerInputs } from './cleaner.js';
 
@@ -26,7 +26,8 @@ const onSubmit = event => {
   event.preventDefault();
 
   sendToServer(user);
-  cleanerInputs();
+  getUser().then(user => alert(user));
+  //cleanerInputs();
 };
 
 const formElem = document.querySelector('.login-form');
