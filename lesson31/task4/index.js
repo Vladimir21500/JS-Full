@@ -36,23 +36,32 @@ const validator = () => {
   submitButtonElem.setAttribute('disabled', true);
 };
 
-const onChanged = event => {
+const setUserData = event => {
   const inputName = event.target.getAttribute('name');
   const inputContent = event.target.value;
 
   if (inputName === 'email') {
     user.email = inputContent;
-    validator();
   }
   if (inputName === 'name') {
     user.name = inputContent;
-    validator();
   }
   if (inputName === 'password') {
     user.password = inputContent;
-    validator();
   }
 };
+
+const onInputChange = event => {
+  const isValidForm = formElem.reportValidity();
+  if (isValidForm) {
+    submitButtonElem.removeAttribute('disabled');
+    setUserData(event);
+  } else {
+    submitButtonElem.setAttribute('disabled', true);
+  }
+};
+
+formElem.addEventListener('input', onInputChange);
 
 const sendToServer = userData => {
   return fetch(baseUrl, {
@@ -75,5 +84,5 @@ const onSubmit = event => {
     });
 };
 
-formElem.addEventListener('change', onChanged);
+formElem.addEventListener('change', onInputChange);
 formElem.addEventListener('submit', onSubmit);
