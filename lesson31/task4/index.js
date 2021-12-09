@@ -27,12 +27,8 @@ const nameInputElem = document.querySelector('[name="name"]');
 const passwordInputElem = document.querySelector('[name="password"]');
 const submitButtonElem = document.querySelector('.submit-button');
 
-let emailIsValid = false;
-let nameIsValid = false;
-let passwordIsValid = false;
-
 const validator = () => {
-  if (emailIsValid && nameIsValid && passwordIsValid) {
+  if (formElem.reportValidity()) {
     submitButtonElem.removeAttribute('disabled');
     submitButtonElem.setAttribute('enabled', true);
     return;
@@ -46,17 +42,14 @@ const onChanged = event => {
 
   if (inputName === 'email') {
     user.email = inputContent;
-    emailIsValid = emailInputElem.reportValidity();
     validator();
   }
   if (inputName === 'name') {
     user.name = inputContent;
-    nameIsValid = nameInputElem.reportValidity();
     validator();
   }
   if (inputName === 'password') {
     user.password = inputContent;
-    passwordIsValid = passwordInputElem.reportValidity();
     validator();
   }
 };
@@ -76,9 +69,10 @@ const onSubmit = event => {
 
   sendToServer(user)
     .then(response => response.json())
-    .then(user => alert(JSON.stringify(user)));
-
-  formElem.reset();
+    .then(user => {
+      alert(JSON.stringify(user));
+      formElem.reset();
+    });
 };
 
 formElem.addEventListener('change', onChanged);
