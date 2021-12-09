@@ -21,10 +21,11 @@ const baseUrl = 'https://61af86a73e2aba0017c493ea.mockapi.io/api/v1/users';
 
 const user = {};
 
-const submitButtonElem = document.querySelector('.submit-button');
+const formElem = document.querySelector('.login-form');
 const emailInputElem = document.querySelector('[name="email"]');
 const nameInputElem = document.querySelector('[name="name"]');
 const passwordInputElem = document.querySelector('[name="password"]');
+const submitButtonElem = document.querySelector('.submit-button');
 
 let emailIsValid = false;
 let nameIsValid = false;
@@ -32,10 +33,11 @@ let passwordIsValid = false;
 
 const validator = () => {
   if (emailIsValid && nameIsValid && passwordIsValid) {
-    submitButtonElem.disabled = false;
+    submitButtonElem.removeAttribute('disabled');
+    submitButtonElem.setAttribute('enabled', true);
     return;
   }
-  submitButtonElem.disabled = true;
+  submitButtonElem.setAttribute('disabled', true);
 };
 
 const onChanged = event => {
@@ -59,12 +61,6 @@ const onChanged = event => {
   }
 };
 
-const cleanerInputs = () => {
-  emailInputElem.value = '';
-  nameInputElem.value = '';
-  passwordInputElem.value = '';
-};
-
 const sendToServer = userData => {
   return fetch(baseUrl, {
     method: 'POST',
@@ -80,10 +76,10 @@ const onSubmit = event => {
 
   sendToServer(user)
     .then(response => response.json())
-    .then(user => alert(user));
-  cleanerInputs();
+    .then(user => alert(JSON.stringify(user)));
+
+  formElem.reset();
 };
 
-const formElem = document.querySelector('.login-form');
 formElem.addEventListener('change', onChanged);
 formElem.addEventListener('submit', onSubmit);
