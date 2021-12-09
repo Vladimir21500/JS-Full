@@ -27,43 +27,18 @@ const nameInputElem = document.querySelector('[name="name"]');
 const passwordInputElem = document.querySelector('[name="password"]');
 const submitButtonElem = document.querySelector('.submit-button');
 
-const validator = () => {
-  if (formElem.reportValidity()) {
-    submitButtonElem.removeAttribute('disabled');
-    submitButtonElem.setAttribute('enabled', true);
-    return;
-  }
-  submitButtonElem.setAttribute('disabled', true);
-};
-
-const setUserData = event => {
-  const inputName = event.target.getAttribute('name');
-  const inputContent = event.target.value;
-
-  if (inputName === 'email') {
-    user.email = inputContent;
-  }
-  if (inputName === 'name') {
-    user.name = inputContent;
-  }
-  if (inputName === 'password') {
-    user.password = inputContent;
-  }
-};
-
 const onInputChange = event => {
   const isValidForm = formElem.reportValidity();
   if (isValidForm) {
     submitButtonElem.removeAttribute('disabled');
-    setUserData(event);
   } else {
     submitButtonElem.setAttribute('disabled', true);
   }
 };
 
-formElem.addEventListener('input', onInputChange);
+const sendToServer = () => {
+  const userData = Object.fromEntries(new FormData(formElem));
 
-const sendToServer = userData => {
   return fetch(baseUrl, {
     method: 'POST',
     headers: {
@@ -76,7 +51,7 @@ const sendToServer = userData => {
 const onSubmit = event => {
   event.preventDefault();
 
-  sendToServer(user)
+  sendToServer()
     .then(response => response.json())
     .then(user => {
       alert(JSON.stringify(user));
@@ -84,5 +59,5 @@ const onSubmit = event => {
     });
 };
 
-formElem.addEventListener('change', onInputChange);
+formElem.addEventListener('input', onInputChange);
 formElem.addEventListener('submit', onSubmit);
