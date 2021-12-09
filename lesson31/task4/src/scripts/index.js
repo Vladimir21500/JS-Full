@@ -20,11 +20,15 @@
 
 import { sendToServer } from './backEnd.js';
 import { onChanged, user } from './changeInput.js';
+import { cleanerInputs } from './cleaner.js';
 
-const onSended = () => {
-  console.log('onSended');
+const onSubmit = event => {
+  event.preventDefault();
+
   sendToServer(user);
+  cleanerInputs();
 };
 
-document.querySelector('.login-form').addEventListener('change', onChanged);
-document.querySelector('.submit-button').addEventListener('click', onSended);
+const formElem = document.querySelector('.login-form');
+formElem.addEventListener('change', onChanged);
+formElem.addEventListener('submit', onSubmit);

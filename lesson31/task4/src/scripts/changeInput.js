@@ -18,7 +18,6 @@ const validator = () => {
 };
 
 export const onChanged = event => {
-  console.log('onChange call');
   const inputName = event.target.getAttribute('name');
   const inputContent = event.target.value;
 
