@@ -1,5 +1,5 @@
 import { addItem, cleanReeposList } from './repos.js';
-import { fetchRepositories, fetchUserData } from './requests.js';
+import { fetchRepositories, fetchUserData } from './gateways.js';
 import { hideSpinner, showSpinner } from './spinner.js';
 import { renderUserData } from './user.js';
 
