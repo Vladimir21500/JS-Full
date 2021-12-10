@@ -43,7 +43,6 @@ const onSearchUser = () => {
     })
     .then(url => fetchRepositories(url))
     .then(repos => {
-      // cleanReeposList();
       repos.forEach(el => {
         addItem(el.name);
       });
