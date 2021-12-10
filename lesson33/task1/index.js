@@ -5,6 +5,6 @@ export const fetchUser = async userId => {
     const userData = await response.json();
     return userData;
   } catch (err) {
-    throw new Error('Failed to load data');
+    throw new Error('Failed to fetch user');
   }
 };
