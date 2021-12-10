@@ -5,5 +5,5 @@ const userLocationElem = document.querySelector('.user__location');
 export const renderUserData = user => {
   userAvatarElem.setAttribute('src', user.avatar_url);
   userNameElem.textContent = user.name;
-  userLocationElem.textContent = user.location;
+  userLocationElem.textContent = user.location ? `from ${user.location}` : user.location;
 };
