@@ -1,4 +1,7 @@
-import { render } from './renderer.js';
+import { addItem, cleanReeposList } from './repos.js';
+import { fetchRepositories, fetchUserData } from './requests.js';
+import { hideSpinner, showSpinner } from './spinner.js';
+import { renderUserData } from './user.js';
 
 /* 
 1. при загрузке отображается аватар по умолчанию
@@ -18,8 +21,39 @@ import { render } from './renderer.js';
 */
 const defaultAvatar = 'https:/avatars3.githubusercontent.com/0001';
 
-const userAvatarElem = document.querySelector('.user__avatar');
-userAvatarElem.setAttribute('src', defaultAvatar);
+const defaultUser = {
+  avatar_url: defaultAvatar,
+  name: '',
+  location: '',
+};
+
+renderUserData(defaultUser);
 
 const buttonElem = document.querySelector('.name-form__btn');
-buttonElem.addEventListener('click', render);
+const inputElem = document.querySelector('.name-form__input');
+
+const onSearchUser = () => {
+  showSpinner();
+  cleanReeposList();
+  const userName = inputElem.value;
+  fetchUserData(userName)
+    .then(user => {
+      renderUserData(user);
+      return user.repos_url;
+    })
+    .then(url => fetchRepositories(url))
+    .then(repos => {
+      // cleanReeposList();
+      repos.forEach(el => {
+        addItem(el.name);
+      });
+    })
+    .catch(err => {
+      alert('Failed to load data');
+    })
+    .finally(() => {
+      hideSpinner();
+    });
+};
+
+buttonElem.addEventListener('click', onSearchUser);

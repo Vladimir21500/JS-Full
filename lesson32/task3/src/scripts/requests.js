@@ -1,12 +1,19 @@
 const baseUrl = 'https://api.github.com/users';
 
-const nameInputElem = document.querySelector('.name-form__input');
-
-export const getUser = () => {
-  const enteredName = nameInputElem.value;
-  return fetch(`${baseUrl}/${enteredName}`).then(response => response.json());
+export const fetchUserData = userName => {
+  return fetch(`${baseUrl}/${userName}`).then(response => {
+    if (response.status === 200) {
+      return response.json();
+    }
+    throw new Error('Failed to load data');
+  });
 };
 
-export const getRepos = url => {
-  return fetch(`${url}`).then(response => response.json());
+export const fetchRepositories = url => {
+  return fetch(`${url}`).then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('Failed to load data');
+  });
 };
