@@ -19,7 +19,8 @@ import { renderUserData } from './user.js';
 
  при любой ошибке показываем alert('Failed to load data')
 */
-const defaultAvatar = 'https:/avatars3.githubusercontent.com/0001';
+const defaultAvatar =
+  'https://gromcode.s3.eu-central-1.amazonaws.com/front-end/javascript/lesson35/task3/default-page.png';
 
 const defaultUser = {
   avatar_url: defaultAvatar,
