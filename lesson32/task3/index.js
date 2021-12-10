@@ -19,7 +19,7 @@ import { renderUserData } from './user.js';
 
  при любой ошибке показываем alert('Failed to load data')
 */
-const defaultAvatar = 'https:/avatars3.githubusercontent.com/10001';
+const defaultAvatar = 'https:/avatars3.githubusercontent.com/u10001';
 
 const defaultUser = {
   avatar_url: defaultAvatar,
