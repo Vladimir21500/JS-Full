@@ -7,11 +7,12 @@
 function createArrayOfFunctions(num) {
   if (num === undefined) return [];
   if (typeof num !== 'number') return null;
-  let arr = [];
-  for (let i = 0; i < num; i++) {
-    arr[i] = function () {
-      return i;
+  const arr = [];
+  arr.length = num;
+  arr.fill(null);
+  return arr.map((el, index) => {
+    return function () {
+      return index;
     };
-  }
-  return arr;
+  });
 }
