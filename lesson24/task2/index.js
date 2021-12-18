@@ -1,12 +1,12 @@
 const counterElem = document.querySelector(`.counter`);
 const counterValueElem = document.querySelector(`.counter__value`);
 
-const onCounterChange = (event) => {
+const onCounterChange = event => {
   const isButton = event.target.classList.contains(`counter__action`);
 
   if (!isButton) return;
 
-  const action = event.target.dataset.action;
+  const { action } = event.target.dataset.action;
 
   const oldValue = Number(counterValueElem.textContent);
 
@@ -14,13 +14,12 @@ const onCounterChange = (event) => {
 
   localStorage.setItem(`counterValue`, newValue);
 
-  counterValueElem.textContent =
-    action === `decrease` ? oldValue - 1 : oldValue + 1;
+  counterValueElem.textContent = action === `decrease` ? oldValue - 1 : oldValue + 1;
 };
 
 counterElem.addEventListener(`click`, onCounterChange);
 
-const onStorageChange = (event) => {
+const onStorageChange = event => {
   counterValueElem.textContent = event.newValue;
 };
 

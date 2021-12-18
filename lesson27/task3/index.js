@@ -1,5 +1,5 @@
 /* здесь мы создаем промис, который резолвит объект { name: 'Tom', age: 17 } через 1 секунду */
-const userDataPromise = new Promise((resolve) => {
+const userDataPromise = new Promise(resolve => {
   setTimeout(() => {
     resolve({ name: 'Tom', age: 17 });
   }, 1000);

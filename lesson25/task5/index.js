@@ -37,21 +37,17 @@ const setMethodsNames = {
   milliseconds: 'setMilliseconds',
 };
 
-export const shmoment = (date) => {
+export const shmoment = date => {
   let result = new Date(date);
   const changeDate = {
     add(type, number) {
       const currentUnitValue = result[getMethodsNames[type]]();
-      result = new Date(
-        result[setMethodsNames[type]](currentUnitValue + number)
-      );
+      result = new Date(result[setMethodsNames[type]](currentUnitValue + number));
       return this;
     },
     subtract(type, number) {
       const currentUnitValue = result[getMethodsNames[type]]();
-      result = new Date(
-        result[setMethodsNames[type]](currentUnitValue - number)
-      );
+      result = new Date(result[setMethodsNames[type]](currentUnitValue - number));
       return this;
     },
     result() {

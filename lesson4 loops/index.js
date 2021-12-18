@@ -1,16 +1,16 @@
+'use strict';
+
 /**
- * @param {number} num
- * @return {undefined}
+ * @param {number} minutes
+ * @param {number} seconds
+ * @param {number} mills
+ * @return {number}
  */
-function isPrime(num) {
-  for (let index = 2; index < num; index += 1) {
-    if (num % index === 0) return false;
-  }
-  return true;
+function convertMills(minutes, seconds, mills) {
+  return minutes * 60000 + seconds * 1000 + mills;
 }
 
-function getPrimes(num) {
-  for (let index = 2; index < num; index += 1) {
-    if (isPrime(index)) console.log(index);
-  }
-}
+// examples
+convertMills(1, 2, 100); // ===> 62100
+convertMills(0, 2, 100); // ===> 2100
+convertMills(5, 11, 230); // ===> 311230

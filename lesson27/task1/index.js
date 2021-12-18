@@ -1,4 +1,4 @@
-export const addImage = (imgSrc) => {
+export const addImage = imgSrc => {
   const p = new Promise((resolve, reject) => {
     const imgElem = document.createElement('img');
     imgElem.setAttribute('alt', 'My Photo');
@@ -13,9 +13,7 @@ export const addImage = (imgSrc) => {
 
     imgElem.addEventListener('load', onImageLoaded);
 
-    imgElem.addEventListener('error', () =>
-      reject(new Error('Image load is failed...'))
-    );
+    imgElem.addEventListener('error', () => reject(new Error('Image load is failed...')));
   });
 
   return p;

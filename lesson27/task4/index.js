@@ -5,7 +5,7 @@
  * Ответьте себе на вопрос, какой тип данных имеет переменная successPromise
  */
 
-const successPromise = new Promise((resolve) => {
+const successPromise = new Promise(resolve => {
   resolve(67);
 });
 

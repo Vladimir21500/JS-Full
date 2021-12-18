@@ -4,4 +4,4 @@ const formatter = new Intl.DateTimeFormat(`en`, {
   hour12: false,
 });
 
-export const getGreenwichTime = (date) => formatter.format(date);
+export const getGreenwichTime = date => formatter.format(date);
